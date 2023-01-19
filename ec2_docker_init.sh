@@ -17,9 +17,11 @@ sudo apt install unzip
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
-aws ecr get-login-password --region us-east-1
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 532146782045.dkr.ecr.us-east-1.amazonaws.com
 
+#terraform
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
 
 sudo gpasswd -a $USER docker
 newgrp docker
